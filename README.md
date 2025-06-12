@@ -5,13 +5,13 @@ A simple Python package to download ERA5 reanalysis data using the CDS API.
 ## Installation
 
 ```bash
-pip install git+https://github.com/yourusername/era5_downloader.git
+pip install git+https://github.com/V-Chavarrias/era5_downloader.git
 ```
 
 Or clone and install locally:
 
 ```bash
-git clone https://github.com/yourusername/era5_downloader.git
+git clone https://github.com/V-Chavarrias/era5_downloader.git
 cd era5_downloader
 pip install -e .
 ```
