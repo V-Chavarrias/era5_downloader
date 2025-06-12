@@ -31,6 +31,14 @@ def download_era5_data(
             os.makedirs(variable_folder, exist_ok=True)
             output_file = os.path.join(variable_folder, f"{bdate}_{variable}.nc")
 
+            #if the file already exists, skip downloading
+            if os.path.exists(output_file):
+                print(f"File {output_file} already exists, skipping download.")
+                continue
+            
+            # Download data from CDS API
+            print(f"Downloading {variable} data for {bdate} to {output_file}")
+            
             c.retrieve(
                 'reanalysis-era5-single-levels',
                 {
