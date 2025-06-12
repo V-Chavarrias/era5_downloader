@@ -20,22 +20,21 @@ def download_era5_data(
     c = cdsapi.Client()
     os.makedirs(output_root, exist_ok=True)
 
-    for year in years:
+    for variable in variables:
+    
         bdate = str(year)
-        year_folder = os.path.join(output_root, bdate)
-        os.makedirs(year_folder, exist_ok=True)
+        variable_folder = os.path.join(output_root, variable)
+        os.makedirs(variable_folder, exist_ok=True)
 
-        for variable in variables:
+        for year in years:
             print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]: get variable {variable} from {bdate}")
-            variable_folder = os.path.join(year_folder, variable)
-            os.makedirs(variable_folder, exist_ok=True)
             output_file = os.path.join(variable_folder, f"{bdate}_{variable}.nc")
 
             #if the file already exists, skip downloading
             if os.path.exists(output_file):
                 print(f"File {output_file} already exists, skipping download.")
                 continue
-            
+
             # Download data from CDS API
             print(f"Downloading {variable} data for {bdate} to {output_file}")
             
