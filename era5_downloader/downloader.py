@@ -21,12 +21,17 @@ def download_era5_data(
     os.makedirs(output_root, exist_ok=True)
 
     for variable in variables:
-    
-        bdate = str(year)
+        
         variable_folder = os.path.join(output_root, variable)
         os.makedirs(variable_folder, exist_ok=True)
 
         for year in years:
+
+            bdate = str(year)
+            # Ensure the date is in the correct format
+            if len(bdate) != 4:
+                raise ValueError(f"Year {year} is not in the correct format (YYYY).")
+            
             print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]: get variable {variable} from {bdate}")
             output_file = os.path.join(variable_folder, f"{bdate}_{variable}.nc")
 
