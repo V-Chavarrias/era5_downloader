@@ -1,6 +1,7 @@
 import cdsapi
 from datetime import datetime
 import os
+import subprocess
 
 def download_era5_data(
     variables,
@@ -17,6 +18,20 @@ def download_era5_data(
         area (list): Geographic area in [N, W, S, E] format.
         output_root (str): Root directory to save downloaded files.
     """
+    # Print the version of this file
+    print(f"Running {os.path.basename(__file__)} (last modified: {datetime.fromtimestamp(os.path.getmtime(__file__))})")
+    
+    # Print Git commit hash if available
+    try:
+        repo_dir = os.path.dirname(os.path.abspath(__file__))
+        git_hash = subprocess.check_output(
+            ["git", "-C", repo_dir, "rev-parse", "--short", "HEAD"],
+            stderr=subprocess.DEVNULL
+        ).decode().strip()
+        print(f"Git commit hash: {git_hash}")
+    except Exception:
+        print("Git commit hash: unavailable")
+
     c = cdsapi.Client()
     os.makedirs(output_root, exist_ok=True)
 
